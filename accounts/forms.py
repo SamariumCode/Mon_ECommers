@@ -1,6 +1,7 @@
-from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django import forms
 
 from .models import User
 
@@ -17,7 +18,7 @@ class UserCreationForm(forms.ModelForm):  # Create User in admin panel
         fields = ('email', 'phone_number', 'full_name')
 
     def clean_email(self):
-        email = self.changed_data.get('email')
+        email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise ValidationError('A user with that email already exists.')
         return email

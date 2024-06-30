@@ -14,7 +14,7 @@ class UserManager(BaseUserManager):
             raise ValueError('user most have full name')
 
         user = self.model(phone_number=phone_number,
-                          email=self.normalize_email(email), full_nam=full_name)
+                          email=self.normalize_email(email), full_name=full_name)
 
         user.set_password(password)
         user.save(using=self._db)

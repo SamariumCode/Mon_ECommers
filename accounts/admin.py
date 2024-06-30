@@ -16,7 +16,7 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (
-            None, {'fields': (
+            'Main', {'fields': (
                 'email', 'phone_number', 'full_name', 'password'
             )}
         ),
@@ -29,7 +29,7 @@ class UserAdmin(BaseUserAdmin):
 
     add_fieldsets = (
         (
-            None, {'fields': (
+            'Change Here', {'fields': (
                 'phone_number', 'email', 'full_name', 'password1', 'password2'
             )}
         ),
