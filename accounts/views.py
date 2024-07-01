@@ -11,10 +11,11 @@ from . import forms
 class UserRegisterView(View):
 
     form_class = forms.UserRegitrationForm
+    template_name = 'accounts/register.html'
 
     def get(self, request):
         form = self.form_class
-        return render(request, 'accounts/register.html', {'form': form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         form = self.form_class(request.POST)
@@ -33,7 +34,7 @@ class UserRegisterView(View):
             messages.success(
                 request, 'ما کدی رو برای شما ارسال کردیم', extra_tags='success')
             return redirect('accounts:verify-code')
-        return redirect('home:home')
+        return render(request, self.template_name, {'form': form})
 
 
 class UserRegisterVerifyCodeView(View):
