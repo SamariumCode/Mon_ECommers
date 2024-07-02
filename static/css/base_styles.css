@@ -1,0 +1,13 @@
+.jombotron {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #e9ecef;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    font-size: 14px;
+
+    color: black;
+}

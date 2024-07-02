@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load static %}
 
 
 {% block page_title %}
@@ -6,6 +7,13 @@
 Online Shop
 
 {% endblock page_title %}
+
+
+{% block extra_headers %}
+
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+
+{% endblock extra_headers %}
 
 
 
