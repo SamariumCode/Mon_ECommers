@@ -2,8 +2,10 @@ from typing import Any
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from django.views import View
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from . models import Product
+from utils import IsAdminUserMixin
 
 
 class HomeView(View):
@@ -13,7 +15,10 @@ class HomeView(View):
         return render(request, 'home/home.html', {'products': products})
 
 
-class ProductDetailView(View):
+class ProductDetailView(IsAdminUserMixin, View):
+
+    # def test_func(self):
+    #     return self.request.user.is_authenticated and self.request.user.is_admin
 
     def setup(self, request, *args, **kwargs):
         self.product_instance = get_object_or_404(Product, slug=kwargs['slug'])
