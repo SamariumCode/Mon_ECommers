@@ -98,7 +98,6 @@ class UserLoginView(View):
                 request, phone_number=cd['phone'], password=cd['password'])
             if user is not None:
                 login(request, user)
-                # Profile.objects.create(user=user)
                 messages.success(
                     request, 'کاربر گرامی شما با موفقیت وارد شدید', extra_tags='success')
 
