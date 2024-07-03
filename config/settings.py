@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 
+    'storages',
+
+
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
 ]
@@ -143,3 +146,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "accounts.User"
+
+
+# arvan clude storage
+
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
+
+AWS_ACCESS_KEY_ID = '6205efee-88d1-4d21-8499-cae334c8198d'
+
+AWS_SECRET_ACCESS_KEY = 'b2dfacbb244e11e66f719225b30c5e08d38430602046aca59d348eea38440c24'
+
+AWS_S3_ENDPOINT_URL = 'https://s3.ir-tbz-sh1.arvanstorage.ir'
+
+AWS_STORAGE_BUCKET_NAME = 'django-onlineshop-course2'
+
+AWS_SERVICE_NAME = 's3'
+
+AWS_S3_FILE_OVERWRITE = False

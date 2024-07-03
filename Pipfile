@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 kavenegar = "*"
 pillow = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 
