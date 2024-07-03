@@ -9,6 +9,7 @@ kavenegar = "*"
 pillow = "*"
 django-storages = "*"
 boto3 = "*"
+celery = "*"
 
 [dev-packages]
 
