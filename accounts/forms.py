@@ -3,7 +3,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django import forms
 
-from .models import User
+from .models import User, OtpCode
 
 
 class UserCreationForm(forms.ModelForm):  # Create User in admin panel
@@ -75,6 +75,7 @@ class UserRegitrationForm(forms.Form):
 
         if user:
             raise ValidationError('کاربری با این شماره تلفن قبلا ثبت شده است')
+        OtpCode.objects.filter(phone_number=phone).delete()
         return phone
 
 
