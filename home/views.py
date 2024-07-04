@@ -12,7 +12,7 @@ class HomeView(View):
 
     def get(self, request, slug=None):
         products = Product.objects.filter(availbale=True)
-        categories = Category.objects.all()
+        categories = Category.objects.filter(is_sub=False)
 
         if slug:
             category = Category.objects.get(slug=slug)

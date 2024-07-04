@@ -3,6 +3,9 @@ from django.db import models
 
 
 class Category(models.Model):
+    sub_category = models.ForeignKey(
+        'self', on_delete=models.CASCADE, related_name='scategory', null=True, blank=True)
+    is_sub = models.BooleanField(default=False)
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
 
@@ -19,8 +22,8 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name='products')
+    category = models.ManyToManyField(
+        Category, related_name='products')
 
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
