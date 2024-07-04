@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 
     'storages',
+    'django_celery_beat',
 
 
     'accounts.apps.AccountsConfig',
@@ -165,3 +166,14 @@ AWS_STORAGE_BUCKET_NAME = 'django-onlineshop-course2'
 AWS_SERVICE_NAME = 's3'
 
 AWS_S3_FILE_OVERWRITE = False
+
+
+# settings.py
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
