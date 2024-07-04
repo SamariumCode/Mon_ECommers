@@ -4,15 +4,21 @@ from django.http import HttpRequest, HttpResponse
 from django.views import View
 from django.contrib.auth.mixins import UserPassesTestMixin
 
-from . models import Product
+from . models import Product, Category
 from utils import IsAdminUserMixin
 
 
 class HomeView(View):
 
-    def get(self, request):
+    def get(self, request, slug=None):
         products = Product.objects.filter(availbale=True)
-        return render(request, 'home/home.html', {'products': products})
+        categories = Category.objects.all()
+
+        if slug:
+            category = Category.objects.get(slug=slug)
+            products = products.filter(category=category)
+
+        return render(request, 'home/home.html', {'products': products, 'categories': categories})
 
 
 class ProductDetailView(IsAdminUserMixin, View):
