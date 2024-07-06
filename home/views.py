@@ -5,6 +5,7 @@ from django.views import View
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 from . models import Product, Category
+from orders.forms import CartAddForm
 from utils import IsAdminUserMixin
 
 
@@ -32,4 +33,5 @@ class ProductDetailView(IsAdminUserMixin, View):
 
     def get(self, request, slug):
         product = self.product_instance
-        return render(request, 'home/detail.html', {'product': product})
+        form = CartAddForm()
+        return render(request, 'home/detail.html', {'product': product, 'form': form})
