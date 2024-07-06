@@ -21,7 +21,7 @@ class Order(models.Model):
         return sum(item.get_cost() for item in self.items.all())
 
     def __str__(self):
-        return f'{self.user}   -   {self.id}'
+        return f'{self.user}'
 
 
 class OrderItem(models.Model):
@@ -36,4 +36,4 @@ class OrderItem(models.Model):
         return self.price * self.quantity
 
     def __str__(self):
-        return self.id
+        return str(self.id)
