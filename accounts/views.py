@@ -1,9 +1,11 @@
 import random
 from django.views import View
+from django.utils import timezone
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from datetime import timedelta
 
 from utils import send_otp_code
 from . models import OtpCode, User
@@ -51,6 +53,14 @@ class UserRegisterVerifyCodeView(View):
         user_session = request.session['user_registration_info']
         code_instance = OtpCode.objects.get(
             phone_number=user_session['phone_number'])
+
+        expiry_time = timezone.now() - timedelta(minutes=1)
+
+        if code_instance.created < expiry_time:
+            code_instance.delete()
+            messages.error(request, 'کد شما منقضی شده است',
+                           extra_tags='danger')
+            return redirect('accounts:user-register')
 
         form = self.form_class(request.POST)
 
