@@ -1,3 +1,5 @@
+from home.models import Product
+
 
 CART_SESSION_ID = 'cart'
 
@@ -21,5 +23,17 @@ class Cart:
         self.cart[product_id]['quantity'] += quantity
         self.save()
 
-        def save(self):
-            self.session.modified = True
+    def save(self):
+        self.session.modified = True
+
+    def __iter__(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(pk__in=product_ids)
+        cart = self.cart.copy()
+
+        for product in products:
+            cart[str(product.id)]['product'] = product.name
+
+        for item in cart.values():
+            item['total_price'] = int(item['price']) * item['quantity']
+            yield item
